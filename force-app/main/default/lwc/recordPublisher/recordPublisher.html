@@ -1,0 +1,39 @@
+<template>
+    <lightning-card title="Record Publisher" icon-name="standard:broadcast">
+        <div class="slds-p-horizontal_small">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                    <lightning-input 
+                        type="text" 
+                        label="Record ID"
+                        value={recordId}
+                        onchange={handleRecordIdChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                    <lightning-input 
+                        type="text" 
+                        label="Record Name"
+                        value={recordName}
+                        onchange={handleRecordNameChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3">
+                    <lightning-input 
+                        type="text" 
+                        label="Object Type"
+                        value={objectType}
+                        onchange={handleObjectTypeChange}>
+                    </lightning-input>
+                </div>
+            </div>
+            
+            <lightning-button 
+                label="Publish Message"
+                variant="brand"
+                onclick={handlePublishMessage}
+                class="slds-m-top_medium">
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>

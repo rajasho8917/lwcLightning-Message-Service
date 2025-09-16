@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Account Export" icon-name="standard:account">
+        <div class="slds-m-around_medium">
+            <lightning-button 
+                variant="brand" 
+                label="Download CSV" 
+                icon-name="utility:download" 
+                onclick={downloadCSV}
+                class="slds-m-right_small">
+            </lightning-button>
+
+            <lightning-button 
+                variant="success" 
+                label="Download Excel" 
+                icon-name="utility:download" 
+                onclick={downloadExcel}>
+            </lightning-button>
+        </div>
+
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>

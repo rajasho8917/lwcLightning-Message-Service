@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="Record Subscriber" icon-name="standard:record">
+        <div class="slds-p-horizontal_small">
+            <template if:true={hasReceivedMessage}>
+                <div class="slds-box slds-theme_success slds-m-bottom_small">
+                    <h3 class="slds-text-heading_small slds-m-bottom_x-small">
+                        Last Received Message:
+                    </h3>
+                    <p><strong>Record ID:</strong> {receivedMessage.recordId}</p>
+                    <p><strong>Record Name:</strong> {receivedMessage.recordName}</p>
+                    <p><strong>Object Type:</strong> {receivedMessage.objectType}</p>
+                    <p><strong>Received At:</strong> {receivedMessage.timestamp}</p>
+                </div>
+            </template>
+
+            <template if:false={hasReceivedMessage}>
+                <div class="slds-box slds-theme_info">
+                    <p>Waiting for your messages...</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

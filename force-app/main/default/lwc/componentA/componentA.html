@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Accounts" icon-name="standard:account">
+        <lightning-button label="Refresh" onclick={handleManualRefresh} slot="actions"></lightning-button>
+        <template if:true={error}>
+            <div class="slds-text-body_small slds-text-color_error">Error : {error}</div>
+        </template>
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+        <template if:true={accounts}>
+            <lightning-datatable key-field="Id" data={accounts} columns={columns}></lightning-datatable>
+        </template>
+    </lightning-card>
+</template>

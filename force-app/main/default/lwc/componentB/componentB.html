@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Account Editor" icon-name="standard:account">
+        <div class="slds-p-around_small">
+            <lightning-input label="Account Id" value={recordId} onchange={handleIdChange}></lightning-input>
+            <lightning-input label="Name" value={name} onchange={handleNameChange}></lightning-input>
+            <lightning-input label="Phone" value={phone} onchange={handlePhoneChange}></lightning-input>
+            <lightning-input label="Industry" value={industry} onchange={handleIndustryChange}></lightning-input>
+
+            <div class="slds-m-top_small">
+                <lightning-button variant="brand" label="Save" onclick={handleSave}></lightning-button>
+                <lightning-button label="Clear" onclick={handleClear}></lightning-button>
+            </div>
+
+            <template if:true={statusMessage}>
+                <div class="slds-m-top_small">{statusMessage}</div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
+    

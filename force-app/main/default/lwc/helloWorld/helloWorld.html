@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="My First LWC" icon-name="standard:custom">
+        <div class="slds-p-horizontal_small">
+            <p class="slds-text-heading_medium slds-m-bottom_small">
+                {greeting}
+            </p>
+            
+            <lightning-input 
+                type="text" 
+                label="Enter your name"
+                value={inputValue}
+                onchange={handleInputChange}>
+            </lightning-input>
+            
+            <lightning-button 
+                label="Update Greeting"
+                variant="brand"
+                onclick={handleButtonClick}
+                class="slds-m-top_small">
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>
