@@ -8,7 +8,13 @@
             <lightning-spinner alternative-text="Loading"></lightning-spinner>
         </template>
         <template if:true={accounts}>
-            <lightning-datatable key-field="Id" data={accounts} columns={columns}></lightning-datatable>
+            <lightning-datatable 
+                    key-field="Id" 
+                    data={accounts} 
+                    columns={columns}
+                    onrowselection={handleRowSelection}
+                    max-row-selection="1"
+                    ></lightning-datatable>
         </template>
     </lightning-card>
 </template>

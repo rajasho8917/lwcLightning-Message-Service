@@ -1,5 +1,5 @@
 import { LightningElement, track, wire } from 'lwc';
-import { publish, MessageContext } from 'lightning/messageService';
+import { publish, subscribe, MessageContext } from 'lightning/messageService';
 import AccountChannel from '@salesforce/messageChannel/AccountChannel__c';
 import updateAccount from '@salesforce/apex/getAccountData.updateAccount';
 
@@ -9,8 +9,33 @@ export default class ComponentB extends LightningElement {
     @track phone = '';
     @track industry = '';
     @track statusMessage = '';
+    @track subscription;
 
     @wire(MessageContext) messageContext;
+
+    connectedCallback() {
+        this.subscribeToMessage();
+    }
+
+    subscribeToMessage() {
+        if (this.subscription) return;
+        this.subscription = subscribe(
+            this.messageContext,
+            AccountChannel,
+            (message) => this.handleMessage(message)
+        );
+    }
+
+    handleMessage(message) {
+        if (message?.action === 'SELECTED' && message.payload) {
+            const accountData = message.payload;
+            this.recordId = accountData.Id;
+            this.name = accountData.Name;
+            this.phone = accountData.Phone;
+            this.industry = accountData.Industry;
+            this.statusMessage = 'Account data populated from selection.';
+        }
+    }
 
     handleIdChange(e) { this.recordId = e.target.value; }
     handleNameChange(e) { this.name = e.target.value; }

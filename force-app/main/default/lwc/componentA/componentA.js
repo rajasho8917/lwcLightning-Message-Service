@@ -1,5 +1,5 @@
 import { LightningElement, track, wire } from 'lwc';
-import { subscribe, MessageContext } from 'lightning/messageService';
+import { subscribe, publish, MessageContext } from 'lightning/messageService';
 import AccountChannel from '@salesforce/messageChannel/AccountChannel__c';
 import getAccount from '@salesforce/apex/getAccountData.getAccount';
 import { refreshApex } from '@salesforce/apex';
@@ -8,6 +8,7 @@ export default class ComponentA extends LightningElement {
     @track accounts;
     @track error;
     @track isLoading = false;
+    @track selectedRow;
 
     columns = [
         { label: 'Name', fieldName: 'Name' },
@@ -50,6 +51,26 @@ export default class ComponentA extends LightningElement {
     handleMessage(message) {
         if (message?.action === 'UPDATED') {
             this.refreshAccounts();
+        }
+    }
+    
+    handleRowSelection(event) {
+        const selectedRow = event.detail.selectedRows[0];
+        this.selectedRow = selectedRow;
+
+        // Publish the entire selected row object to the message channel
+        if (selectedRow) {
+            const message = {
+                recordId: selectedRow.Id,
+                action: 'SELECTED',
+                payload: {
+                    Id: selectedRow.Id,
+                    Name: selectedRow.Name,
+                    Phone: selectedRow.Phone,
+                    Industry: selectedRow.Industry
+                }
+            };
+            publish(this.messageContext, AccountChannel, message);
         }
     }
 
