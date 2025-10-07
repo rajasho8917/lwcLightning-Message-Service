@@ -1,0 +1,45 @@
+<template>
+    <lightning-card title="Case Management" icon-name="standard:case">
+        <div class="slds-m-around_medium">
+            <lightning-record-picker 
+                object-api-name="Account" 
+                label="Filter by Accounts" 
+                placeholder="Search accounts..." 
+                onchange={handleSelect}>
+            </lightning-record-picker>
+        </div>
+        <div class="slds-m-bottom_small slds-clearfix slds-p-horizontal_medium">
+            <div class="slds-float_left">
+                Total Open Cases: <strong>{openCasesCount}</strong>
+            </div>
+            <div class="slds-float_right">
+                Selected Cases: <strong>{selectedCasesCount}</strong>
+                <lightning-button 
+                    class="slds-m-left_small" 
+                    label="Close Selected Cases" 
+                    variant="brand" 
+                    onclick={handleCloseCases} 
+                    disabled={disableButton}>
+                </lightning-button>
+            </div>
+        </div>
+        <template if:true={isDataVisible}>
+            <lightning-datatable 
+                key-field="Id" 
+                data={cases} 
+                columns={columns} 
+                onrowselection={handleRowSelection}>
+            </lightning-datatable>
+        </template>
+        <template if:true={error}>
+            <div class="slds-text-color_error slds-p-around_medium">
+                An error occurred: {error.body.message}
+            </div>
+        </template>
+        <template if:false={isDataVisible}>
+            <p class="slds-text-align_center slds-p-around_medium">
+                No cases found for the selected account.
+            </p>
+        </template>
+    </lightning-card>
+</template>

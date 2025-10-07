@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Create Account with Related Contact" icon-name="standard:account">
+        <div class="slds-m-around_medium">
+            <lightning-record-edit-form 
+                object-api-name="Account"
+                onsuccess={handleAccountSuccess}>
+
+                <lightning-messages></lightning-messages>
+
+                <!-- Account Fields -->
+                <lightning-input-field field-name="Name"></lightning-input-field>
+                <lightning-input-field field-name="Industry"></lightning-input-field>
+
+                <!-- Contact Fields (manually captured) -->
+                <lightning-input label="Contact Last Name" value={contactLastName} 
+                                 onchange={handleLastNameChange} required>
+                </lightning-input>
+
+                <lightning-input label="Contact Email" type="email" value={contactEmail} 
+                                 onchange={handleEmailChange}>
+                </lightning-input>
+
+                <!-- Save Both -->
+                <lightning-button 
+                    class="slds-m-top_small" 
+                    type="submit" 
+                    label="Save Account & Contact" 
+                    variant="brand">
+                </lightning-button>
+            </lightning-record-edit-form>
+        </div>
+    </lightning-card>
+</template>

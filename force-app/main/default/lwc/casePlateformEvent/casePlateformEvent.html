@@ -1,0 +1,48 @@
+<template>
+    <lightning-card title="Case Platform Event Subscriber" icon-name="custom:custom99">
+        <div class="slds-m-around_medium">
+            <p>
+                This component subscribes to the <b>Case_Platform_event__e</b> channel to show new case events in real time.
+            </p>
+            <div class="slds-m-vertical_small">
+                <template lwc:if={isSubscribed}>
+                    <lightning-button
+                        label="Unsubscribe"
+                        onclick={handleUnsubscribe}
+                        variant="destructive"
+                        class="slds-m-right_small">
+                    </lightning-button>
+                </template>
+                <template lwc:else>
+                    <lightning-button
+                        label="Subscribe"
+                        onclick={handleSubscribe}
+                        variant="brand"
+                        class="slds-m-right_small">
+                    </lightning-button>
+                </template>
+
+                <lightning-button
+                    label="Clear Events"
+                    onclick={handleClear}
+                    variant="neutral">
+                </lightning-button>
+            </div>
+
+            <!-- Conditional rendering for data table -->
+            <template lwc:if={events.length}>
+                <lightning-datatable
+                    key-field="id"
+                    data={events}
+                    columns={columns}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+            <template lwc:else>
+                <p class="slds-text-align_center slds-text-color_weak">
+                    No events received yet. Click "Subscribe" to start listening.
+                </p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

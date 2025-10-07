@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simple Search Page</title>
+  <style>
+    /* Basic reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height: 100%; font-family: "Arial", sans-serif; color:#202124; }
+
+    /* Page layoutrtt */
+    .page { 
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .main {
+      flex: 1 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+    .center {
+      width: 100%;
+      max-width: 640px;
+      text-align: center;
+    }
+
+    /* Logo (simple text with playful colors) */
+    .logo {
+      font-size: 84px;
+      font-weight: 700;
+      letter-spacing: -2px;
+      margin-bottom: 28px;
+      line-height: 1;
+    }
+    .logo .g1 { color: #4285F4; } /* blue */
+    .logo .g2 { color: #EA4335; } /* red */
+    .logo .g3 { color: #FBBC05; } /* yellow */
+    .logo .g4 { color: #34A853; } /* green */
+
+    /* Search box */
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+      padding: 8px 12px;
+      border: 1px solid #dfe1e5;
+    }
+    .search-box input[type="text"] {
+      flex: 1 1 auto;
+      border: none;
+      outline: none;
+      font-size: 18px;
+      padding: 10px 12px;
+      min-width: 0;
+    }
+    .search-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      opacity: .6;
+      display:flex; align-items:center; justify-content:center;
+    }
+
+    /* Buttons */
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+    .btn {
+      background: #f8f9fa;
+      border: 1px solid #f8f9fa;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .btn:hover { box-shadow: 0 1px 1px rgba(0,0,0,0.08); }
+
+    /* Footer */
+    footer {
+      flex-shrink: 0;
+      background: #f2f2f2;
+      padding: 12px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: #5f6368;
+    }
+
+    /* Responsive */
+    @media (max-width:480px){
+      .logo { font-size: 56px; margin-bottom: 18px; }
+      .search-box input[type="text"]{ font-size:16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main class="main">
+      <div class="center">
+        <!-- simple logo made of colored letters -->
+        <div class="logo" aria-hidden="true">
+          <span class="g1">G</span><span class="g2">o</span><span class="g3">o</span><span class="g1">g</span><span class="g4">l</span><span class="g2">e</span>
+        </div>
+
+        <!-- simple search form that submits to Google search (q parameter) -->
+        <form class="search" action="https://www.google.com/search" method="GET" target="_blank" onsubmit="return true">
+          <div class="search-box" role="search">
+            <div class="search-icon" aria-hidden="true">🔍</div>
+            <input
+              name="q"
+              type="text"
+              placeholder="Search the web or type a URL"
+              aria-label="Search"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="buttons" role="group" aria-label="Search actions">
+            <button type="submit" class="btn">Google Search</button>
+            <button type="button" class="btn" onclick="document.querySelector('.search input[name=q]').value='random fun facts'; document.querySelector('.search').submit();">I'm Feeling Lucky</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <span>Advertising &nbsp; · &nbsp; Business &nbsp; · &nbsp; About &nbsp; · &nbsp; Privacy</span>
+    </footer>
+  </div>
+</body>
+</html>

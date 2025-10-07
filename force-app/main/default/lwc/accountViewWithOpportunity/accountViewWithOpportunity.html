@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Account View With Opportunity" icon-name="standard:account">
+        <div class="slds-m-around_medium">
+            <template if:true={accounts.data}>
+                <lightning-datatable 
+                    key-field="accountId" 
+                    data={accounts.data} 
+                    columns={columns} 
+                    max-row-selection="1"
+                    onrowselection={handleRowSelection}>
+                </lightning-datatable>
+            </template>
+            <template if:true={accounts.error}>
+                <div class="slds-text-color_error">{accounts.error}</div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
